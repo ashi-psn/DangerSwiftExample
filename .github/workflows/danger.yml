@@ -13,8 +13,10 @@ jobs:
       - name: install DangerJS
         run: npm install -g danger
 
-      - name: Move to DangerRunner
-        run: cd DangerRunner
-
       - name: Build DangerRunner
+        working-directory: DangerRunner
         run: swift build -c release
+
+      - name: Run Danger
+        working-directory: DangerRunner
+        run: swift run danger-swift ci --cwd ../
