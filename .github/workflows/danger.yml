@@ -2,6 +2,8 @@ name: Danger
 on:
   pull_request:
     types: [opened, edited, reopened]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
@@ -9,7 +11,7 @@ jobs:
     name: "Run Danger"
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: install DangerJS
         run: npm install -g danger
 
