@@ -1,0 +1,23 @@
+name: Danger
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: "Run Danger"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install DangerJS
+        run: npm install -g danger
+
+      - name: Move to DangerRunner
+        run: cd DangerRunner
+
+      - name: Build DangerRunner
+        run: swift build -c release
+
+      - name: Run Danger
+        run: swift run danger-swift local --cwd ../  
